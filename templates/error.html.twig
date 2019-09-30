@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+{% block title %}{{ parent() }} - ERROR {% endblock %}
+{% block body %}
+    <div class="alert alert-danger" role="alert">
+        {{ htmlFullErrorMessage|raw }}
+    </div>
+
+{% endblock %}

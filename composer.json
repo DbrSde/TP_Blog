@@ -1,0 +1,6 @@
+{
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2",
+        "twig/twig": "^2.11"
+    }
+}
