@@ -1,0 +1,16 @@
+{% extends "base.admin.html.twig" %}
+{% block title %}{{ parent() }} - Lecture de fichier {% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron">
+        <h1 class="display-4">Lire un fichier</h1>
+        <form method="post">
+            <input type="hidden" name="champMini">
+            <button type="submit" class="btn btn-primary">Lire</button>
+        </form>
+    </div>
+
+    {{ dump(arrayDataFile) }}
+
+{% endblock %}
