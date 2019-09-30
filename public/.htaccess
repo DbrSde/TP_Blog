@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# ^ $ = Début et fin Regex
+# ([a-z]+) = http://www.php.local/Post
+# ([a-z]+)/?(([a-z]+))? = http://www.php.local/Post/List par xemple, le "?" veut dire que tout ce qui est dans la parenthèse avant est facultatif (([a-z]+)), ainsi http://www.php.local/Post peut marcher quand meme
+# /? = le / est facultatif
+# [NC, L] = Case insensitive + termine le processus de réécriture en cours
+
+RewriteRule ^([a-z]+)/?([a-z]+)?/?([A-Za-z0-9-]+)?/?$ index.php?controller=$1&action=$2&param=$3 [NC,L]
