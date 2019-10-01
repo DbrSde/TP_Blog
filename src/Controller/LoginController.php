@@ -36,6 +36,9 @@ class LoginController extends AbstractController {
 
         echo $this->twig->render('Login/inscription.html.twig');
 
+        //header('location : Login/form');
+
+
     }
 
 
