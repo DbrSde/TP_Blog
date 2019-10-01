@@ -70,6 +70,13 @@ class __TwigTemplate_79b32957685c997b29eee209085c9d19da7d36742a256905f2f9c07b3b5
             <li class=\"nav-item\">
                 <a class=\"nav-link\" href=\"/Contact\">Contact</a>
             </li>
+            <li class=\"nav-item\">
+                <a class=\"nav-link\" href=\"/Admin\">Admin</a>
+            </li>
+            <li class=\"nav-item\">
+                <a class=\"nav-link\" href=\"/Login/inscription\">Inscription</a>
+            </li>
+
         </ul>
         <form class=\"form-inline my-2 my-lg-0\" method=\"post\" action=\"/Post/List\">
             <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Rechercher un article\" aria-label=\"Search\" name=\"search\">
@@ -80,9 +87,9 @@ class __TwigTemplate_79b32957685c997b29eee209085c9d19da7d36742a256905f2f9c07b3b5
 <div class=\"container\">
 
     ";
-        // line 36
+        // line 43
         $this->displayBlock('body', $context, $blocks);
-        // line 37
+        // line 44
         echo "
 </div>
 
@@ -93,9 +100,9 @@ class __TwigTemplate_79b32957685c997b29eee209085c9d19da7d36742a256905f2f9c07b3b5
 <script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js\"></script>
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js\"></script>
 ";
-        // line 46
+        // line 53
         $this->displayBlock('javascript', $context, $blocks);
-        // line 47
+        // line 54
         echo "</body>
 </html>";
     }
@@ -113,13 +120,13 @@ class __TwigTemplate_79b32957685c997b29eee209085c9d19da7d36742a256905f2f9c07b3b5
         $macros = $this->macros;
     }
 
-    // line 36
+    // line 43
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 46
+    // line 53
     public function block_javascript($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -132,7 +139,7 @@ class __TwigTemplate_79b32957685c997b29eee209085c9d19da7d36742a256905f2f9c07b3b5
 
     public function getDebugInfo()
     {
-        return array (  123 => 46,  117 => 36,  111 => 10,  104 => 5,  99 => 47,  97 => 46,  86 => 37,  84 => 36,  57 => 11,  55 => 10,  47 => 5,  41 => 1,);
+        return array (  130 => 53,  124 => 43,  118 => 10,  111 => 5,  106 => 54,  104 => 53,  93 => 44,  91 => 43,  57 => 11,  55 => 10,  47 => 5,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -163,6 +170,13 @@ class __TwigTemplate_79b32957685c997b29eee209085c9d19da7d36742a256905f2f9c07b3b5
             <li class=\"nav-item\">
                 <a class=\"nav-link\" href=\"/Contact\">Contact</a>
             </li>
+            <li class=\"nav-item\">
+                <a class=\"nav-link\" href=\"/Admin\">Admin</a>
+            </li>
+            <li class=\"nav-item\">
+                <a class=\"nav-link\" href=\"/Login/inscription\">Inscription</a>
+            </li>
+
         </ul>
         <form class=\"form-inline my-2 my-lg-0\" method=\"post\" action=\"/Post/List\">
             <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Rechercher un article\" aria-label=\"Search\" name=\"search\">
