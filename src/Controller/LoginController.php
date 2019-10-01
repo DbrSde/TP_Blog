@@ -1,6 +1,10 @@
 <?php
 namespace src\Controller;
 
+use src\Model\Bdd;
+use src\Model\Inscription;
+use src\Model\PostManager;
+
 class LoginController extends AbstractController {
 
     /**
@@ -17,6 +21,25 @@ class LoginController extends AbstractController {
         ]);
 
     }
+
+    public function Inscription(){
+
+        if ($_POST){
+            $inscription = new Inscription();
+            $inscription->setEmail($_POST['mail']);
+            $inscription->setPseudo($_POST['password']);
+            $inscription->setMot_de_passe($_POST['pseudo']);
+
+            $postManager = new PostManager(Bdd::getInstance());
+            $postManager->register($inscription);
+        }
+
+        echo $this->twig->render('Login/inscription.html.twig');
+
+    }
+
+
+
 
     /**
      * Vérification du user / mdp

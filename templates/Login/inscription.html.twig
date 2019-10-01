@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+{% block title %}{{ parent() }} - Login {% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Inscription</h5>
+
+                    <form class="form-signin" name="authentification" method="POST">
+                        <div class="form-label-group">
+                            <label for="inputLogin">E-mail</label>
+                            <input type="text" name="mail" id="inputLogin" class="form-control" placeholder="Votre Email" required autofocus value="{{ arrayRememberMe[0] }}">
+
+                        </div>
+
+                        <div class="form-label-group">
+                            <label for="inputPassword"> Mot de passe</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Votre mot de passe" required value="{{ arrayRememberMe[1] }}">
+
+                        </div>
+
+                        <div class="form-label-group">
+                            <label for="inputPassword"> Pseudo </label>
+                            <input type="text" name="pseudo" id="inputPseudo" class="form-control" placeholder="Votre Pseudo" required value="{{ arrayRememberMe[1] }}">
+
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"> Valider </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

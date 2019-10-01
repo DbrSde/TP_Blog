@@ -42,6 +42,21 @@ class Apiv1Controller {
         }
     }
 
+    public function inscription(){
+        $postManager = new PostManager(Bdd::getInstance());
+        $role = 0;
+        $valide = 0;
+        $inscription = new Inscription([
+            "Email" => $_POST['email_inscrit'],
+            "Mot_de_passe" => $_POST['MDP_inscrit'],
+            "Role" => $role,
+            "Valide" => $valide,
+            "Pseudo" => $_POST["Pseudo_inscrit"]
+        ]);
+        $result = $postManager->register($inscription);
+        echo json_encode($result, JSON_FORCE_OBJECT);
+    }
+
     public function Put(){
         $postManager = new PostManager(Bdd::getInstance());
         if($_SERVER['REQUEST_METHOD'] == 'PUT'){
