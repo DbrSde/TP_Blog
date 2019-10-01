@@ -48,7 +48,8 @@
             </div>
             <input type="hidden" name="postImageFull" id="postImageFull" value="{{ post.getImageRepository}}/{{ post.getImageFileName}}">
             <input type="hidden" name="postId" id="postID" value="{{ post.id }}">
-            <input type="hidden" name="token" value="{{ session.token }}">
+            <input type="hidden" name="token" value="{{ token }}">
+            {{dump(token)}}
             <button type="submit" class="btn btn-primary">Valider</button>
         </form>
     </div>

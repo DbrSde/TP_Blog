@@ -101,7 +101,9 @@ class AdminPostController extends AbstractController{
 
 
     public function edit($id){
+
         if($_POST){
+            $token = $_SESSION['token'];
             $sqlRepository = null;
             $nomImage = null;
             if(!empty($_FILES['postImage']['name']) )
@@ -125,12 +127,12 @@ class AdminPostController extends AbstractController{
                     move_uploaded_file($_FILES['postImage']['tmp_name'], $repository.'/'.$nomImage);
                     // suppression ancienne image si existante
                     if(strlen($_POST['postImageFull'])>1){
-                        unlink($_SERVER['DOCUMENT_ROOT'].'/uploads/images/'.$_POST['postImageFull']);
+                        @unlink($_SERVER['DOCUMENT_ROOT'].'/uploads/images/'.$_POST['postImageFull']);
                     }
 
                 }
             }
-            if($_SESSION['token'] == $_POST['token']) {
+            if($token == $_POST['token']) {
                 // Soumission du formulaire
                 $postManager = new PostManager(Bdd::getInstance());
                 $post = new Post([
@@ -142,6 +144,7 @@ class AdminPostController extends AbstractController{
                     , "ImageFileName" => $nomImage
                     , "id" => $_POST['postId']
                 ]);
+                var_dump($post);
                 $result = $postManager->update($post);
                 if ($result['retourCode'] == 0) {
                     $update = true; // pour pouvoir rééexécuter la requete de lecture
@@ -152,6 +155,8 @@ class AdminPostController extends AbstractController{
             // Génération du TOKEN (celui ne doit pas être généré lors du post sinon il ne sera jamais identique
             $token = bin2hex(random_bytes(32));
             $_SESSION['token'] = $token;
+            var_dump($token);
+            var_dump($_SESSION['token']);
         }
 
 
@@ -164,6 +169,7 @@ class AdminPostController extends AbstractController{
 
         echo $this->twig->render('AdminPost/edit.html.twig',[
             'post' => $post
+            ,'token' => $token
         ]);
     }
 
@@ -180,4 +186,3 @@ class AdminPostController extends AbstractController{
 
     }
 }
-
