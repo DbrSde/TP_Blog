@@ -72,7 +72,6 @@ class LoginController extends AbstractController {
         }else{
             $errMsg = "Accès interdit sans authentification";
             $_SESSION['errorlogin'] = $errMsg;
-            var_dump('03');
             return false;
         }
 
