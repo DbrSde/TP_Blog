@@ -18,6 +18,30 @@ class PostManager {
         $this->db = $db;
     }
 
+    public function register(Inscription $inscription){
+        try{
+            $requete = $this->db->prepare('INSERT INTO inscription (Email, Mot_de_passe, Role, Valide, Pseudo) VALUES(:Email, :Mot_de_passe, :Role, :Valide, :Pseudo)');
+            $requete->execute([
+                'Email' => $inscription->getEmail(),
+                'Mot_de_passe' => $inscription->getMot_de_passe(),
+                'Role' => 0,
+                'Valide' => 0,
+                'Pseudo' => $inscription->getPseudo(),
+            ]);
+
+            $return = [
+                'retourCode' => 0
+                ,'retourDesc' => '[OK] Insertion'
+            ];
+        }catch (\Exception $e){
+            $return = [
+                'retourCode' => 1
+                ,'retourDesc' => '[ERROR] Insertion => '.$e->getMessage()
+            ];
+        }
+        return $return;
+    }
+
     public function add(Post $post){
         try{
             $requete = $this->db->prepare('INSERT INTO posts (titre, description, dateajout, auteur, ImageRepository, ImageFileName) VALUES(:titre, :description, :dateajout, :auteur, :ImageRepository, :ImageFileName)');
