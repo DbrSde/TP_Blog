@@ -185,4 +185,10 @@ class AdminPostController extends AbstractController{
         }
 
     }
+
+    public function validation (){
+
+        echo $this->twig->render('AdminPost/validation.html.twig');
+
+    }
 }
