@@ -1,5 +1,4 @@
 <?php
-
 namespace src\Model;
 class Inscription {
 
@@ -8,9 +7,9 @@ class Inscription {
     private $mdp;
     private $role;
 
-/**
- * @return mixed
-*/
+    /**
+     * @return mixed
+     */
     public function getEmail()
     {
         return $this->email;
@@ -57,9 +56,8 @@ class Inscription {
 
 
 
-
-/**
- * @return Inscription
-*/
+    /**
+     * @return Inscription
+     */
 
 }
