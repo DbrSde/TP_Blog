@@ -153,6 +153,29 @@ class PostManager {
         return $posts;
     }
 
+
+    public function getAllUsers(){
+        $inscriptions = [];
+        $requete = $this->db->prepare('SELECT * FROM inscription');
+        $requete->execute();
+        while ($donnees = $requete->fetch(\PDO::FETCH_ASSOC))
+        {
+            $inscription = new Inscription();
+
+
+            $inscription->setEmail($donnees['Email']);
+            $inscription->setPseudo($donnees['Pseudo']);
+            $inscription->setRole($donnees['Role']);
+            $inscription->setMot_de_passe($donnees['Mot_de_passe']);
+
+            $inscriptions[] = $inscription;
+        }
+
+        return $inscriptions;
+    }
+
+
+
     /**
      * @param $limit
      * @param $nbArticleParPage

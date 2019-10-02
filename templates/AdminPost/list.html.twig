@@ -14,31 +14,31 @@
         </form>
     </div>
     <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Titre</th>
-            <th scope="col">Auteur</th>
-            <th scope="col">Date</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for post in dataPosts %}
+            <thead>
             <tr>
-                <th scope="row"><a href="/AdminPost/View/{{ post.id }}">#{{ post.id }}</a></th>
-                <td>{{ post.Titre }}</td>
-                <td>{{ post.Auteur }}</td>
-                <td>{{ post.DateAjout|date("d/m/Y") }}</td>
-                <td>
-                    <a class="btn btn-success" href="/AdminPost/View/{{ post.id }}">Voir</a>
-                    <a class="btn btn-warning" href="/AdminPost/Edit/{{ post.id }}">Editer</a>
-                    <a class="btn btn-danger" href="/AdminPost/Delete/{{ post.id }}">Supprimer</a>
-                </td>
+                <th scope="col">#</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Date</th>
+                <th scope="col">Actions</th>
             </tr>
-        {% endfor %}
+            </thead>
+            <tbody>
+            {% for post in dataPosts %}
+                <tr>
+                    <th scope="row"><a href="/AdminPost/View/{{ post.id }}">#{{ post.id }}</a></th>
+                    <td>{{ post.Titre }}</td>
+                    <td>{{ post.Auteur }}</td>
+                    <td>{{ post.DateAjout|date("d/m/Y") }}</td>
+                    <td>
+                        <a class="btn btn-success" href="/AdminPost/View/{{ post.id }}">Voir</a>
+                        <a class="btn btn-warning" href="/AdminPost/Edit/{{ post.id }}">Editer</a>
+                        <a class="btn btn-danger" href="/AdminPost/Delete/{{ post.id }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
 {% endblock %}

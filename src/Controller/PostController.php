@@ -10,6 +10,7 @@ class PostController extends AbstractController {
     //quand on va sur www.php.local/Post tout court
     public function index(){
         $this->List(1);
+        $this->Users(1);
     }
 
     public function List($page){
@@ -17,6 +18,7 @@ class PostController extends AbstractController {
         $numeroPage = 0;
         if($_POST){
             $dataPosts = $postManager->getBy('titre',$_POST['search'] );
+
         }else{
             $nbArticleParPage = Post::nbArticleParPage;
             if($page<>''){
@@ -55,7 +57,14 @@ class PostController extends AbstractController {
         }else{
             throw new \Exception('Il manque un ID pour cette action !');
         }
-
     }
-}
 
+    public function Users($page){
+      $postManager = new PostManager(Bdd::getInstance());
+      $dataUsers = $postManager->getAllUsers();
+      // var_dump($dataUsers);
+      echo $this->twig->render('redacPost/list.html.twig',[
+          'dataUsers' => $dataUsers
+      ]);
+  }
+}
