@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css"> -->
-    <link rel="stylesheet" href="../assets/css/trumbowyg.min.css">
+    <link rel="stylesheet" href="../src/assets/css/trumbowyg.min.css">
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
     {% block css %}{% endblock %}
 
 <body>
@@ -36,7 +37,7 @@
                     <a class="dropdown-item" href="/AdminFile/Write">Ecrire</a>
                 </div>
             </li>
-            <a class="nav-item nav-link " href="/Post/Users">Utilisateurs</a>
+            <a class="nav-item nav-link " href="/RedacPost/Users">Utilisateurs</a>
             <a class="nav-item nav-link " href="/AdminFixtures/Load">Fixtures</a>
             <a class="nav-item nav-link " href="/AdminPost/Validation">Validation Inscription</a>
             <a class="nav-item nav-link " href="/Login/Logout">Déconnexion</a>
@@ -56,9 +57,12 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-<script src="../assets/js/trumbowyg.min.js"></script>
-<script type="text/javascript">
-  $('#postDescription').trumbowyg();
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#postDescription' ) )
+        .catch( error => {
+            console.error( error );
+        } );
 </script>
 {% block javascript %}{% endblock %}
 </body>
