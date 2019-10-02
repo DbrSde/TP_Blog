@@ -11,29 +11,36 @@ class RedacPostController extends AbstractController{
     {
         parent::__construct();
         $authentication = new LoginController();
-        if(!$authentication->RoleNeeded('redacteur')){
+        if(!$authentication->RoleNeeded('admin')){
             header('Location: /Login/Form');
         }
     }
 
     public function index(){
-        $this->List();
+        $this->User(1);
     }
 
-    public function List(){
-        $postManager = new PostManager(Bdd::getInstance());
-        if($_POST){
-            $dataPosts = $postManager->getBy('titre',$_POST['search'] );
-        }else{
-            $dataPosts = $postManager->getAll();
-        }
-
-        echo $this->twig->render('RedacPost/list.html.twig',[
-            'dataPosts' => $dataPosts
-        ]);
-
-    }
-
+    // public function List(){
+    //     $postManager = new PostManager(Bdd::getInstance());
+    //     if($_POST){
+    //         $dataPosts = $postManager->getBy('titre',$_POST['search'] );
+    //     }else{
+    //         $dataPosts = $postManager->getAll();
+    //     }
+    //
+    //     echo $this->twig->render('AdminPost/list.html.twig',[
+    //         'dataPosts' => $dataPosts
+    //     ]);
+    //
+    // }
+    public function Users($page){
+      $postManager = new PostManager(Bdd::getInstance());
+      $dataUsers = $postManager->getAllUsers();
+      // var_dump($dataUsers);
+      echo $this->twig->render('redacPost/list.html.twig',[
+          'dataUsers' => $dataUsers
+      ]);
+  }
     public function View($id){
         if($id<>''){
             $postManager = new PostManager(Bdd::getInstance());

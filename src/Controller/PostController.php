@@ -10,7 +10,6 @@ class PostController extends AbstractController {
     //quand on va sur www.php.local/Post tout court
     public function index(){
         $this->List(1);
-        $this->Users(1);
     }
 
     public function List($page){
@@ -59,12 +58,4 @@ class PostController extends AbstractController {
         }
     }
 
-    public function Users($page){
-      $postManager = new PostManager(Bdd::getInstance());
-      $dataUsers = $postManager->getAllUsers();
-      // var_dump($dataUsers);
-      echo $this->twig->render('redacPost/list.html.twig',[
-          'dataUsers' => $dataUsers
-      ]);
-  }
 }
