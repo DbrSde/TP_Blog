@@ -4,14 +4,18 @@ namespace src\Controller;
 use src\Model\Bdd;
 use src\Model\Post;
 use src\Model\PostManager;
+//use src\Model\Login;
 
 class AdminPostController extends AbstractController{
+    
 
     public function __construct()
     {
+
         parent::__construct();
         $authentication = new LoginController();
-        if(!$authentication->RoleNeeded('admin')){
+        if(!$authentication->RoleNeeded('redacteur') || !$authentication->RoleNeeded('admin')){
+
             header('Location: /Login/Form');
         }
     }
@@ -21,6 +25,9 @@ class AdminPostController extends AbstractController{
     }
 
     public function List(){
+
+
+
         $postManager = new PostManager(Bdd::getInstance());
         if($_POST){
             $dataPosts = $postManager->getBy('titre',$_POST['search'] );

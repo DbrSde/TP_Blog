@@ -51,27 +51,31 @@ class LoginController extends AbstractController
     public function Check()
     {
 
-        //die(var_dump($_POST));
         $login = new Login(Bdd::getInstance());
         $user = $login->userByEmail($_POST['login']);
 
 
-        if (!$user || !password_verify($_POST['password'], $user['Mot_de_passe'])) {
+        if (!$user || !password_verify($_POST['password'], $user['Mot_de_passe']) && $user['Valide'] == 0) {
             $errMsg = "Erreur Authentification";
             $_SESSION['errorlogin'] = $errMsg;
             header('Location: /Login/Form');
+        } else {
+            if (isset($_POST['remember'])) {
+                setcookie('rememberMeLogin', json_encode(array($_POST['login'], $_POST['password'])), time() + (86400 * 30), "/"); // 86400 = 1 day
+            }
+
+            if($user['Role'] == 0){
+                $_SESSION['login'] = array(
+                    'role'  => ['redacteur']
+                );
+            }else{
+                $_SESSION['login'] = array(
+                    'role'  => ['admin']
+                );
+            }
+
+            header('Location: /AdminPost/List');
         }
-
-
-        if (isset($_POST['remember'])) {
-            setcookie('rememberMeLogin', json_encode(array($_POST['login'], $_POST['password'])), time() + (86400 * 30), "/"); // 86400 = 1 day
-        }
-
-        $_SESSION['login']['role']=$user['Role'];
-
-
-
-        header('Location: /Admin');
 
     }
 
@@ -89,8 +93,13 @@ class LoginController extends AbstractController
      * @param $role
      * @return bool
      */
+
+
+
+
     public function RoleNeeded($role)
     {
+
         unset($_SESSION['errorlogin']);
         if (isset($_SESSION['login'])) {
             if (!in_array($role, $_SESSION['login']['role'])) {
