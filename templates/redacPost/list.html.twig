@@ -26,14 +26,13 @@
         <tbody>
         {% for user in dataUsers %}
             <tr>
-                <th scope="row"><a href="/AdminPost/View/{{ user.id }}">#{{ user.id }}</a></th>
+                <th scope="row"><a href="/RedacPost/View/{{ user.id }}">#{{ user.id }}</a></th>
                 <td>{{ user.Email }}</td>
                 <td>{{ user.Role }}</td>
                 <td>{{ user.Pseudo }}</td>
                 <td>
-                    <a class="btn btn-success" href="/AdminPost/View/{{ post.id }}">Voir</a>
-                    <a class="btn btn-warning" href="/AdminPost/Edit/{{ post.id }}">Editer</a>
-                    <a class="btn btn-danger" href="/AdminPost/Delete/{{ post.id }}">Supprimer</a>
+                    <a class="btn btn-warning" href="/RedacPost/Edit/{{ user.id }}">Editer</a>
+                    <a class="btn btn-danger" href="/RedacPost/Delete/{{ user.id }}" value="{{ user.id }}">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

@@ -11,7 +11,7 @@
                     <li class="list-group-item active">{{ post.Titre }}</li>
                     <li class="list-group-item">Ecrit par : {{ post.Auteur }}</li>
                     <li class="list-group-item">Ecrit le : {{ post.DateAjout|date("d/m/Y") }}</li>
-                    <li class="list-group-item">{{ post.Description|nl2br }}</li>
+                    <li class="list-group-item">{{ post.Description|raw|nl2br }}</li>
                 </ul>
             </div>
             <div class="col-6">

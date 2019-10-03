@@ -9,7 +9,7 @@ class Post extends Page implements \JsonSerializable {
     private $imageRepository;
     private $imageFileName;
 
-    const nbArticleParPage = 20;
+    const nbArticleParPage = 5;
 
     /**
      * @return \DateTime

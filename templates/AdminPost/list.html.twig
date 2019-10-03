@@ -24,7 +24,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for post in dataPosts %}
+            {% for post in dataPosts|slice(0, 5) %}
                 <tr>
                     <th scope="row"><a href="/AdminPost/View/{{ post.id }}">#{{ post.id }}</a></th>
                     <td>{{ post.Titre }}</td>

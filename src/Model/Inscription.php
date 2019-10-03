@@ -6,6 +6,7 @@ class Inscription {
     private $pseudo;
     private $mdp;
     private $role;
+    private $id;
 
     /**
      * @return mixed
@@ -30,9 +31,20 @@ class Inscription {
         return $this->role;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function setEmail($values)
     {
         $this->email = $values;
+        return $this;
+    }
+
+    public function setId($values)
+    {
+        $this->id = $values;
         return $this;
     }
 
@@ -44,7 +56,6 @@ class Inscription {
 
     public function setMot_de_passe($values)
     {
-        $values = password_hash($values, PASSWORD_DEFAULT);
         $this->mdp = $values;
         return $this;
     }

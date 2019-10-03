@@ -4,6 +4,7 @@ namespace src\Controller;
 use src\Model\Bdd;
 use src\Model\Post;
 use src\Model\PostManager;
+use src\Model\UserManager;
 
 class RedacPostController extends AbstractController{
 
@@ -17,34 +18,24 @@ class RedacPostController extends AbstractController{
     }
 
     public function index(){
-        $this->User(1);
+        $this->Users(1);
     }
 
-    // public function List(){
-    //     $postManager = new PostManager(Bdd::getInstance());
-    //     if($_POST){
-    //         $dataPosts = $postManager->getBy('titre',$_POST['search'] );
-    //     }else{
-    //         $dataPosts = $postManager->getAll();
-    //     }
-    //
-    //     echo $this->twig->render('AdminPost/list.html.twig',[
-    //         'dataPosts' => $dataPosts
-    //     ]);
-    //
-    // }
+
+    //Permet d'afficher la liste des utilisateurs inscrits
     public function Users($page){
-      $postManager = new PostManager(Bdd::getInstance());
-      $dataUsers = $postManager->getAllUsers();
-      // var_dump($dataUsers);
+      $userManager = new UserManager(Bdd::getInstance());
+      $dataUsers = $userManager->getAllUsers();
       echo $this->twig->render('redacPost/list.html.twig',[
           'dataUsers' => $dataUsers
       ]);
   }
+
+
     public function View($id){
         if($id<>''){
-            $postManager = new PostManager(Bdd::getInstance());
-            $post = $postManager->get($id);
+            $userManager = new UserManager(Bdd::getInstance());
+            $post = $userManager->get($id);
 
             echo $this->twig->render('redacPost/view.html.twig',[
                 'post' => $post
@@ -53,56 +44,6 @@ class RedacPostController extends AbstractController{
         }else{
             throw new \Exception('Il manque un ID pour cette action !');
         }
-
-    }
-
-    public function Add(){
-        if($_POST){
-            // Gestion du fichier Image
-            $sqlRepository = null;
-            $nomImage = null;
-            if( !empty($_FILES['postImage']['name']) )
-            {
-
-                $tabExt = array('jpg','gif','png','jpeg');    // Extensions autorisees
-                // Recuperation de l'extension du fichier
-                $extension  = pathinfo($_FILES['postImage']['name'], PATHINFO_EXTENSION);
-                // On verifie l'extension du fichier
-                if(in_array(strtolower($extension),$tabExt))
-                {
-                    // On renomme le fichier
-                    $nomImage = md5(uniqid()) .'.'. $extension;
-                    // Création du répertoire d'acceuil
-                    $dateNow = new \DateTime();
-                    $sqlRepository = $dateNow->format('Y/m');
-                    $repository = $_SERVER['DOCUMENT_ROOT'].'/uploads/images/'.$dateNow->format('Y/m');
-                    if(!is_dir($repository)){
-                        mkdir($repository,0777,true);
-                    }
-                    move_uploaded_file($_FILES['postImage']['tmp_name'], $repository.'/'.$nomImage);
-
-                }
-            }
-
-            // Soumission du formulaire
-            $postManager = new PostManager(Bdd::getInstance());
-            $post = new Post([
-                "Titre" =>  $_POST['postTitre']
-                ,"Description" => $_POST['postDescription']
-                ,"DateAjout" =>$_POST['postDate']
-                ,"Auteur" => $_POST['postAuteur']
-                ,"ImageRepository" => $sqlRepository
-                ,"ImageFileName" => $nomImage
-            ]);
-            $result = $postManager->add($post);
-            if($result['retourCode']==0){
-                header('Location: /Redacpost/View/'.Bdd::getInstance()->lastInsertId());
-            }else{
-                throw new \Exception('Erreur ajout SQL !');
-            }
-        }
-
-        echo $this->twig->render('RedacPost/add.html.twig');
 
     }
 
@@ -141,7 +82,7 @@ class RedacPostController extends AbstractController{
             }
             if($token == $_POST['token']) {
                 // Soumission du formulaire
-                $postManager = new PostManager(Bdd::getInstance());
+                $userManager = new UserManager(Bdd::getInstance());
                 $post = new Post([
                     "Titre" => $_POST['postTitre']
                     , "Description" => $_POST['postDescription']
@@ -152,7 +93,7 @@ class RedacPostController extends AbstractController{
                     , "id" => $_POST['postId']
                 ]);
                 var_dump($post);
-                $result = $postManager->update($post);
+                $result = $userManager->update($post);
                 if ($result['retourCode'] == 0) {
                     $update = true; // pour pouvoir rééexécuter la requete de lecture
                 }
@@ -168,8 +109,8 @@ class RedacPostController extends AbstractController{
 
 
         if($_GET  OR $update) {
-            $postManager = new PostManager(Bdd::getInstance());
-            $post = $postManager->get($id);
+            $userManager = new UserManager(Bdd::getInstance());
+            $post = $userManager->get($id);
         }else {
             throw new \Exception('Absence de paramètre pour cette action !');
         }
@@ -180,13 +121,18 @@ class RedacPostController extends AbstractController{
         ]);
     }
 
+    //Permet de supprimer un utilisateur inscrit
     public function Delete($id){
         if($id<>''){
-            $postManager = new PostManager(Bdd::getInstance());
-            $post = $postManager->get($id);
-            $postManager->delete($post);
+            $userManager = new UserManager(Bdd::getInstance());
+            $user = $userManager->get($id);
+            // var_dump($user);
+            // die;
+            $result = $userManager->delete($user);
+            // print_r($result);
+            // die;
 
-            header('Location: /Adminpost/List');
+            header('Location: /RedacPost/Users');
         }else{
             throw new \Exception('Il manque un ID pour cette action !');
         }

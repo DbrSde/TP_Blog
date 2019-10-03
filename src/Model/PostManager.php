@@ -87,6 +87,26 @@ class PostManager {
         return $return;
     }
 
+    public function deleteUser(Inscription $inscription){
+        try{
+            $requete = $this->db->prepare('DELETE FROM inscription WHERE Id=:id');
+            $requete->execute([
+                'id' => $inscription->getId()
+            ]);
+
+            $return = [
+                'retourCode' => 0
+                ,'retourDesc' => '[OK] Suppression'
+            ];
+        }catch (\Exception $e){
+            $return = [
+                'retourCode' => 1
+                ,'retourDesc' => '[ERROR] Suppression => '.$e->getMessage()
+            ];
+        }
+        return $return;
+    }
+
     public function update(Post $post){
         try{
             $requete = $this->db->prepare('UPDATE posts set titre=:titre, description=:description, dateajout=:dateajout, auteur=:auteur, ImageRepository=:ImageRepository, ImageFileName=:ImageFileName WHERE id=:postId');
@@ -114,7 +134,7 @@ class PostManager {
     }
 
     public function get($id){
-        $requete = $this->db->prepare('SELECT * FROM posts where Id = :postId');
+        $requete = $this->db->prepare('SELECT * FROM posts WHERE Id = :postId');
         $requete->execute([
             'postId' => $id
         ]);
@@ -153,29 +173,6 @@ class PostManager {
         return $posts;
     }
 
-
-    public function getAllUsers(){
-        $inscriptions = [];
-        $requete = $this->db->prepare('SELECT * FROM inscription');
-        $requete->execute();
-        while ($donnees = $requete->fetch(\PDO::FETCH_ASSOC))
-        {
-            $inscription = new Inscription();
-
-
-            $inscription->setEmail($donnees['Email']);
-            $inscription->setPseudo($donnees['Pseudo']);
-            $inscription->setRole($donnees['Role']);
-            $inscription->setMot_de_passe($donnees['Mot_de_passe']);
-
-            $inscriptions[] = $inscription;
-        }
-
-        return $inscriptions;
-    }
-
-
-
     /**
      * @param $limit
      * @param $nbArticleParPage
@@ -183,7 +180,7 @@ class PostManager {
      */
     public function getPagination($limit,$nbArticleParPage):array{
         $posts = [];
-        $requete = $this->db->prepare('SELECT * FROM posts ORDER BY DateAjout DESC LIMIT :limit, :maxresult');
+        $requete = $this->db->prepare('SELECT * FROM posts ORDER BY DateAjout ASC LIMIT :limit, :maxresult');
         $requete->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $requete->bindValue(':maxresult', $nbArticleParPage, \PDO::PARAM_INT);
         $requete->execute();

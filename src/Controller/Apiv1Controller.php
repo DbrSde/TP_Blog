@@ -73,8 +73,8 @@ class Apiv1Controller {
                 ,"Description" => $datas->Description
                 ,"DateAjout" => $datas->DateAjout
                 ,"Auteur" => $datas->Auteur
-                ,"ImageRepository" => Null
-                ,"ImageFileName" => Null
+                ,"ImageRepository" => $datas->getImageRepository()
+                ,"ImageFileName" => $datas->getImageFileName()
             ]);
             $result = $postManager->update($post);
             echo json_encode($result, JSON_FORCE_OBJECT);
