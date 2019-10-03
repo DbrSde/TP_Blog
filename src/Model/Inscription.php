@@ -56,6 +56,7 @@ class Inscription {
 
     public function setMot_de_passe($values)
     {
+        $values = password_hash($values, PASSWORD_DEFAULT);
         $this->mdp = $values;
         return $this;
     }
