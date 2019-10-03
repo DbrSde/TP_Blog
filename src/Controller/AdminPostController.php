@@ -14,7 +14,7 @@ class AdminPostController extends AbstractController{
 
         parent::__construct();
         $authentication = new LoginController();
-        if(!$authentication->RoleNeeded('redacteur') || !$authentication->RoleNeeded('admin')){
+        if(!$authentication->RoleNeeded('admin')){
 
             header('Location: /Login/Form');
         }
