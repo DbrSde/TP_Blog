@@ -1,0 +1,36 @@
+{% extends "base.admin.html.twig" %}
+{% block title %}{{ parent() }} - Liste des catégories {% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron">
+        <h1 class="display-4">Liste des catégories</h1>
+        <form name="recherche" method="POST" class="form-inline my-2 my-lg-0">
+            <div class="col-2">
+                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+            </div>
+            <div class="col-8"></div>
+        </form>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Slug</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in datacategories %}
+            <tr>
+                <th scope="row"><a href="/CategoryPost/View/{{ category.id }}">#{{ category.id }}</a></th>
+                <td>{{ category.nom }}</td>
+                <td>{{ category.slug }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}
