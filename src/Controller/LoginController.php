@@ -66,11 +66,11 @@ class LoginController extends AbstractController
 
             if($user['Role'] == 0){
                 $_SESSION['login'] = array(
-                    'role'  => ['redacteur']
+                    'role'  => ['admin']
                 );
             }else{
                 $_SESSION['login'] = array(
-                    'role'  => ['admin']
+                    'role'  => ['redacteur']
                 );
             }
 
