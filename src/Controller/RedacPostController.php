@@ -92,7 +92,7 @@ class RedacPostController extends AbstractController{
                     , "ImageFileName" => $nomImage
                     , "id" => $_POST['postId']
                 ]);
-                var_dump($post);
+                // var_dump($post);
                 $result = $userManager->update($post);
                 if ($result['retourCode'] == 0) {
                     $update = true; // pour pouvoir rééexécuter la requete de lecture
@@ -103,8 +103,8 @@ class RedacPostController extends AbstractController{
             // Génération du TOKEN (celui ne doit pas être généré lors du post sinon il ne sera jamais identique
             $token = bin2hex(random_bytes(32));
             $_SESSION['token'] = $token;
-            var_dump($token);
-            var_dump($_SESSION['token']);
+            // var_dump($token);
+            // var_dump($_SESSION['token']);
         }
 
 

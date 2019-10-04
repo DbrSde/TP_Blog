@@ -48,7 +48,7 @@
                             <a class="text-dark" href="/Post/Detail/{{ post.Id }}">{{ post.Titre }}</a>
                         </h3>
                         <div class="mb-1 text-muted">{{ post.DateAjout|date('d/m/Y') }}</div>
-                        <p class="card-text mb-auto">{{ post.firstXwords(20) }}</p>
+                        <p class="card-text mb-auto">{{ post.firstXwords(20)|raw }}</p><br>
                         <a href="/Post/Detail/{{ post.Id }}">Continuer la lecture</a>
                     </div>
                     {% if file_exist( './uploads/images/'~post.getImageRepository~'/'~post.getImageFileName ) and post.getImageFileName !="" %}
