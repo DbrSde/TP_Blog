@@ -180,7 +180,7 @@ class PostManager {
      */
     public function getPagination($limit,$nbArticleParPage):array{
         $posts = [];
-        $requete = $this->db->prepare('SELECT * FROM posts ORDER BY DateAjout ASC LIMIT :limit, :maxresult');
+        $requete = $this->db->prepare('SELECT * FROM posts ORDER BY DateAjout DESC LIMIT :limit, :maxresult');
         $requete->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $requete->bindValue(':maxresult', $nbArticleParPage, \PDO::PARAM_INT);
         $requete->execute();
