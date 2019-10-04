@@ -1,0 +1,17 @@
+{% extends "base.admin.html.twig" %}
+{% block title %}{{ parent() }} - Ajout article {% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron">
+        <h1 class="display-4">Ajout Article</h1>
+        <form name="catAdd" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="nom">Titre</label>
+                <input type="text" class="form-control" id="catName" name="nom" placeholder="titre de la catégorie">
+            </div>
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </form>
+    </div>
+
+{% endblock %}

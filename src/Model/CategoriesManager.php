@@ -37,4 +37,45 @@ class CategoriesManager {
 
         return $categories;
     }
+
+    public function add(Category $category){
+        try{
+            $requete = $this->db->prepare('INSERT INTO categories (nom, slug) VALUES(:nom, :slug)');
+            $requete->execute([
+                'nom' => $category->getNom()
+                ,'slug' => $category->getSlug()
+            ]);
+
+            $return = [
+                'retourCode' => 0
+                ,'retourDesc' => '[OK] Insertion'
+            ];
+        }catch (\Exception $e){
+            $return = [
+                'retourCode' => 1
+                ,'retourDesc' => '[ERROR] Insertion => '.$e->getMessage()
+            ];
+        }
+        return $return;
+    }
+
+    public function get($id){
+        $categories = [];
+        $requete = $this->db->prepare('SELECT * FROM categories where id = :postId');
+        $requete->execute([
+            'postId' => $id
+        ]);
+        $donnees = $requete->fetch(\PDO::FETCH_ASSOC);
+        $category = new Category();
+
+
+        $category->setNom($donnees['nom']);
+        $category->setid($donnees['id']);
+
+        // $inscriptions[] = $inscription;
+
+
+        return $category;
+    }
+
 }

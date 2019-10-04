@@ -6,6 +6,7 @@ class Category {
     private $nom;
     private $slug;
 
+
     /**
      * @return mixed
      */
@@ -45,6 +46,7 @@ class Category {
         $this->slug = $values;
         return $this;
     }
+
 
 
 
