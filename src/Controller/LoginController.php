@@ -44,6 +44,25 @@ class LoginController extends AbstractController
     }
 
 
+    // Public function Submit(){
+    //         if (isset($_POST['submit'])) {
+    //             $username = $_POST['login'];
+    //             $secretKey = "6Lfqt7sUAAAAAP2Ot9hbFsUiMbmo-5Q47boTsCef";
+    //             $responseKey = $_POST['g-recaptcha-response'];
+    //             $userIP = $_SERVER['REMOTE_ADDR'];
+    //
+    //             $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$responseKey&remoteip=$userIP";
+    //             $response = file_get_contents($url);
+    //             $response = json_decode($response);
+    //             if ($response->success){
+    //                 return true;
+    //             } else {
+    //                 return false;
+    //             }
+    //
+    //         }
+    //       }
+
     /**
      * Vérification du user / mdp
      */
@@ -78,6 +97,38 @@ class LoginController extends AbstractController
         }
 
     }
+
+   //  public function Check(){
+   //     if($_POST){
+   //         $reCaptchaIsOk = $this->Submit();
+   //         if ($reCaptchaIsOk == true) {
+   //
+   //             $this->Submit();
+   //                     if($_POST['remember']){
+   //                         setcookie('rememberMeLogin', json_encode(array($_POST['login'],$_POST['password'])), time() + (86400 * 30), "/"); // 86400 = 1 day
+   //                     }
+   //                     if($_POST['login']=='admin' AND $_POST['password']=='password'){
+   //                         $_SESSION['login'] = array(
+   //                             'role'  => ['admin']
+   //                         );
+   //                         header('Location: /AdminPost/List');
+   //                     }elseif($_POST['login']=='admin2' AND $_POST['password']=='password'){
+   //                         $_SESSION['login'] = array(
+   //                             'role'  => ['file','admin']
+   //                         );
+   //                         header('Location: /AdminPost/List');
+   //                     }else{
+   //                         $_POST['$response']=='$false';
+   //                         $errMsg = "Erreur Authentification";
+   //                         $_SESSION['errorlogin'] = $errMsg;
+   //                         header('Location: /Login/Form');
+   //                     }
+   //         }
+   //         else {
+   //             header('Location: /Login/Form');
+   //         }
+   //         }
+   // }
 
 
     /**
